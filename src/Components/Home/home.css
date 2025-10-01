@@ -8,26 +8,30 @@
     height: 100vh; /*Viewport Height: 100% from screen hight */
     background: linear-gradient(180deg, #b2d5dd, #27e36022 70%);
     display: flex;
+
+    width: 100%;
 }
  
 
 .home-left{
-    flex: 1; /* take portion from flex */
+    flex: 1;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
-    padding-left: 100px;
+    gap: clamp(12px, 2vw, 20px); /* To make design responeive*/
+    padding-left: clamp(16px, 5vw, 100px);
     line-height: 1.2;
-    display: flex;
 }
+
 .home-left h2 {
     color: #090909;
-    font-size: 30px;
+    font-size: clamp(18px, 2.2vw, 30px);
     font-weight: 600;
 }
+
 .home-left p{
     color: #171717;
-    font-size: 70px;
+    font-size: clamp(28px, 6vw, 70px);
     font-weight: 700;
 }
 
@@ -35,45 +39,76 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap:40px;
+    gap: clamp(12px, 3vw, 40px);
 }
+
 .hand-hand-icon img{
-    width: 105px;
+    width: clamp(48px, 10vw, 105px);
 }
 
 .home-btn {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;        /* يخلي النص بالنص */
     align-items: center;
-    background: #ff4141;
-    width:300px;
-    height: 70px;
-    border-radius: 75px;
-    margin-top: 30px; 
-    color: white;
-    font-size: 22px;
-    font-weight: 500; 
+    background: linear-gradient(135deg, #ff4b4b, #ff7a7a); /* تدرج لوني أنعم */
+    width: clamp(200px, 40%, 320px);
+    height: clamp(48px, 9vw, 70px);
+    border-radius: 50px;
+    margin-top: clamp(16px, 3vw, 30px);
 
-}  
+    color: #fff;
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 
-.mohsalem_img{
-    width: 460px;
-    height: 660px;
-    border-radius: 50%;
-    margin-right: 70px;
-    margin-bottom: 100px;
-    opacity: 0.95;
-    border: 5px solid linear-gradient(180deg, #b2d5dd, #27e36022 70%);;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* ظل خفيف */
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* تأثير hover */
+.home-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff7a7a, #ff4b4b);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
 
+
+
+/* ///////////////////////////////// */
+
 .home-right{
-    flex: 0.25;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 70px;
+    
 
+}
+
+
+
+ .mohsalem_img {
+    width: clamp(180px, 40vw, 420px);   /* ما تزيدش عن عرض البيرنت */
+    width: 45%;        /* نسبة من عرض البيرنت */
+    max-height: 95%;
+    height: auto;      /* يخلي الطول يتغير تلقائي حسب العرض */
+    border-radius: 50%;
+    margin: 20px auto; /* توسيط فوق/تحت + بالنص */
+    display: block;
+    opacity: 0.95;
+
+    /* لإضافة 
+    border 
+    متدرج */
+    border: 5px solid transparent;
+    background: linear-gradient(180deg, #b2d5dd, #27e36022 70%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
 }
 
 

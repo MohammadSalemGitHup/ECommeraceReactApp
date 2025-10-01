@@ -5,7 +5,9 @@
     padding: 16px;
     margin: 1px;
     box-shadow: 0px 1px 5px -2px black; /*X-offset,Y-offset,blur radius,spread radius*/
-
+    
+    max-width: 100%;
+    width:100% ;
 }
 
 /* /////////////////////////////// */
