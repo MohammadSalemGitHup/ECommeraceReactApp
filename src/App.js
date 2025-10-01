@@ -8,10 +8,11 @@ import ShopCategory from './Pages/shopCategory.jsx';
 import Product from "./Pages/products.jsx";
 import Cart from './Pages/cart.jsx';
 import LoginSignup from "./Pages/loginSignup.jsx";
-
+import Footer from './Components/Footer/footer.jsx';
 
 function App() {
   
+
 
   //////////////// JSX /////////////////////////////////////
   return (
@@ -34,8 +35,8 @@ function App() {
           <Route path='/login' element={<LoginSignup />} />
 
 
-
         </Routes>
+        <Footer />
 
     </div>
   );

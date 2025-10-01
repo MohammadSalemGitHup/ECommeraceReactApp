@@ -1,10 +1,12 @@
 import React from 'react'
 
+import Home from '../Components/Home/home';
 /* Shop page like a Home Page */
 const Shop = () => {
   return (
     <div>
-        <h1>Hi in Shop</h1>
+
+        <Home />
     </div>
   )
 }
