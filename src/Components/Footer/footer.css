@@ -4,19 +4,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: clamp(20px, 6vw, 50px);
-    padding: clamp(16px, 5vw, 40px) 0;
+    gap: clamp(4px, 2vw, 10px);
+    padding: clamp(2px, 1vw, 4px) 0;
 
     background: linear-gradient(20deg, #d8f4c2, #35d4c922 70%);
 }
 
 .footer-logo{
-    display: flex;
-    flex-direction:row;
-    gap:20px;   
-
+     display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
     transform: scale(0.8);
+
+    align-self: flex-start;   /* يطلّعو يسار */
+    margin-left: clamp(16px, 5vw, 40px); /* مسافة من اليسار */
+ 
+    width: 100%;              /* مهم عشان يكون عندها مساحة تدفع العناصر */
 }
+
 .footer-logo p {
     color: #383838;
     font-size: clamp(20px, 6vw, 30px);
@@ -28,6 +34,9 @@
     flex-direction:row;
     list-style: none;
     gap: clamp(12px, 5vw, 20px);
+
+    margin-left: auto;        /* يدفشها أقصى اليمين */
+
     color:#252525;
     font-size: 22px;
     font-weight: 420;

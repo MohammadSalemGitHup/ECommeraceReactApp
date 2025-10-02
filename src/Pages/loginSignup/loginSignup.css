@@ -1,0 +1,162 @@
+:root{
+  --primary:#6a5acd;
+  --primary-2:#8a7ae6;
+  --text:#333;
+  --glass-bg: rgba(255,255,255,0.18);
+  --glass-border: rgba(255,255,255,0.35);
+}
+
+.login-signup{
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 40px);               /* حواف مرنة */
+  background:url("./loginBackGround.jpg") no-repeat center/cover;
+  box-sizing: border-box;
+}
+
+/* طبقة شفافة اختيارية (يمكن الاستغناء عنها) */
+.login-signup::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.06));
+  pointer-events:none;
+}
+
+
+.login-form {
+  margin-bottom: 500px;
+  margin-left: 800px;
+
+  
+  background: rgba(250, 250, 250, 0.2);  /* خلفية شفافة شوية */
+  backdrop-filter: blur(10px);            /* يعمل ضبابية */
+  -webkit-backdrop-filter: blur(10px);    /* دعم للـ Safari */
+  
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+}
+
+
+.login-form h2{
+  margin: 0 0 16px;
+  color:#1f2937;
+  font-size: clamp(20px, 2.8vw, 24px);
+  text-align: center;
+}
+.form-group{
+  margin-bottom: 14px;
+  transition: transform .25s ease;
+  transform-origin: center;
+}
+.form-group:hover{
+  transform: scale(1.04);
+  transition: 0.6s;
+}
+
+.form-group label{
+  display:block;
+  font-size: 13px;
+  color:#444;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 12px;
+  border: 1px solid #a3a2a2;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  outline:none;
+  background: rgba(255,255,255,0.7);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.form-group input:focus {
+  border-color: #6a5acd;
+}
+
+
+
+
+/*  remember me checkBox */
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap:8px;
+  margin: 6px 0 16px;
+  font-size:14px;
+  color:#444;
+  cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+  accent-color: #6a5acd;   /* يخلي لون الـ checkbox بنفسجي مثلاً */
+  margin-right: 8px;      
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+
+.remember-me label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;  /* يمنع تحديد النص بالغلط */
+}
+
+
+
+/*  login Button  */
+
+
+.submit-btn {
+  background: linear-gradient(135deg, #6a5acd, #8a7ae6); /* تدرج لوني أنيق */
+  color: #fff;
+  border: none;
+  padding: 14px;
+  width: 100%;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  box-shadow: 0 4px 15px rgba(106, 90, 205, 0.3); /* ظل ناعم */
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #5748c3, #7266e8); /* لون أغمق عند الهوفر */
+  transform: translateY(-2px) scale(1.05); /* حركة ناعمة */
+  box-shadow: 0 8px 20px rgba(106, 90, 205, 0.45); /* ظل أكبر عند الهوفر */
+}
+
+.submit-btn:active {
+  transform: scale(0.97); /* عند الضغط ينضغط شوي */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+
+/* //////////////////// */
+.toggle-text {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+} 
+
+.toggle-link {
+  color: #6a5acd;
+  font-weight: 600;
+  cursor: pointer;
+} 
+

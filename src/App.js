@@ -7,7 +7,7 @@ import Shop from "./Pages/Shop/shop.jsx";
 import ShopCategory from './Pages/shopCategory.jsx';
 import Product from "./Pages/products.jsx";
 import Cart from './Pages/cart.jsx';
-import LoginSignup from "./Pages/loginSignup.jsx";
+import LoginSignup from "./Pages/loginSignup/loginSignup.jsx";
 import Footer from './Components/Footer/footer.jsx';
 
 import men_banner from "./Components/Assets/banner_mens.png";
@@ -37,13 +37,15 @@ function App() {
           />
           <Route path="/womens" element={<ShopCategory category="women" banner={women_banner} />} />
           <Route path="/kids" element={<ShopCategory category="kid" banner={kids_banner}/>} />
+
+          <Route path='/login' element={<LoginSignup />} />
           
           <Route path='/product' element={<Product />}   >
               <Route path=':productId' element={<Product />} />
           </Route>
 
           <Route path='/cart' element={<Cart />} />
-          <Route path='/login' element={<LoginSignup />} />
+          
 
 
         </Routes>
