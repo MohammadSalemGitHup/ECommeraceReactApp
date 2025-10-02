@@ -1,2 +1,9 @@
 
 
+.shop{
+  width: 100%;
+  max-width: 100%;
+  min-height: 100svh;  /* يضمن ملء الشاشة مع Home داخلها */
+  display: flex;
+  flex-direction: column;
+}

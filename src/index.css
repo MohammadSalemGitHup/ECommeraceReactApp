@@ -1,8 +1,34 @@
 
+
+/* moh salem add*/
+/* /////////////////////////////////////////////////////////// */
 /* all element initlize with margin:0 */
 *{
   margin: 0;
 }
+
+
+/* ========== Global fluid defaults ========== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+
+/* مسافة عامة مرنة */
+:root { 
+  --space: clamp(12px, 3vw, 24px);
+}
+
+
+/* لإزالة الوميض الأفقي بالخطأ */
+html, body { overflow-x: hidden; }
+
+/* /////////////////////////////////////////////////////////// */
+
+
+
+
 
 
 body {
@@ -12,6 +38,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* moh salem add*/
+  width: 100%;
 }
 
 code {

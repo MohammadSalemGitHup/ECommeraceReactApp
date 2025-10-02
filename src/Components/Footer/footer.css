@@ -4,7 +4,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: clamp(20px, 6vw, 50px);
+    padding: clamp(16px, 5vw, 40px) 0;
 
     background: linear-gradient(20deg, #d8f4c2, #35d4c922 70%);
 }
@@ -18,7 +19,7 @@
 }
 .footer-logo p {
     color: #383838;
-    font-size: 30px;
+    font-size: clamp(20px, 6vw, 30px);
     font-weight: 700;
 }
 
@@ -26,7 +27,7 @@
     display: flex;
     flex-direction:row;
     list-style: none;
-    gap: 20px;
+    gap: clamp(12px, 5vw, 20px);
     color:#252525;
     font-size: 22px;
     font-weight: 420;
@@ -42,73 +43,63 @@
 .footer-social-icons{
     display: flex;
     flex-direction:row;
-    gap:20px;
+    gap: clamp(12px, 5vw, 20px);
 }
-.footer-icon-contener-watsApp {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #25D366;           /* اللون الأخضر المميز لواتساب */
-  border-radius: 50%;            /* يخليه دائرة */
-  width: 60px;
-  height: 60px;
-  margin-top: 5px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transform: scale(0.8);
-}
-.watsApp-icon :hover{
-    transform: scale(1.2);
-}
-.footer-icon-contener-watsApp a {
-  color: white;                  /* الأيقونة بيضا */
-  font-size: 30px;               /* حجم مناسب */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-/* Messenger */
+/* أحجام مرنة للأيقونات */
+.footer-icon-contener-watsApp,
 .footer-icon-contener-messenger {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #c9dff4;          /* الأزرق الرسمي لمسنجر */
-  border-radius: 50%;           /* يخليه دائرة */
-  width: 60px;
-  height: 60px;
+  border-radius: 50%;
+  width: clamp(44px, 12vw, 60px);
+  height: clamp(44px, 12vw, 60px);
   margin-top: 5px;
-  transition: all 0.3s ease;
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transform: scale(0.8);
-  cursor: pointer;
+  transform: scale(0.9);
 }
+
+/* ألوان */
+.footer-icon-contener-watsApp { background: #25D366; }
+.footer-icon-contener-messenger { background: #c9dff4; }
+.footer-icon-contener-messenger:hover {
+  transform: scale(0.95);
+  background: #9db9df;
+}
+
+/* حجم الأيقونة نفسها */
+.footer-icon-contener-watsApp a,
+.footer-icon-contener-messenger a {
+  color: white;
+  font-size: clamp(20px, 6vw, 28px);
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* كان فيها مسافة غلط: `.watsApp-icon :hover` */
+.watsApp-icon:hover { transform: scale(1.1); }
+
 
 .footer-icon-contener-messenger:hover {
   transform: scale(0.9);
-  background: #9db9df;          /* أزرق أغمق عند الهوفر */
+  background: #7494c4;          /* أزرق أغمق عند الهوفر */
 }
-
-
-
-
-
-
 
 
 
 
 .footer-copyRight{
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: #1a1a1a;
-    font-size: 20px;
+    font-size: clamp(14px, 4.2vw, 20px);
 }
 .footer-copyRight hr{
     width:85%;

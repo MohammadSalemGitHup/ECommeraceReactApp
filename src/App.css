@@ -1,6 +1,14 @@
 .App {
   text-align: center;
+  
+  /* ////////// */
+  width: 100%;
+  max-width: 100%;    
+  box-sizing: border-box;
+  
 }
+
+
 
 .App-logo {
   height: 40vmin;

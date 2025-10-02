@@ -5,11 +5,23 @@
 
 
 .home{
-    height: 100vh; /*Viewport Height: 100% from screen hight */
+    height: 100svh; /*Viewport Height: 100% from screen hight */
+         /*  يعمل على معظم المتصفحات الحديثة */
+
     background: linear-gradient(180deg, #b2d5dd, #27e36022 70%);
+    
     display: flex;
+    flex-direction: row;   /* افتراضياً صفين جنب بعض */
+    align-items: center;
+    justify-content: center;
 
     width: 100%;
+    max-width: 100%;
+    
+    /* overflow:hidden;  */
+    overflow: visible;
+    gap: clamp(12px, 4vw, 32px);
+    padding: var(--space);
 }
  
 
@@ -19,27 +31,36 @@
     flex-direction: column;
     justify-content: center;
     gap: clamp(12px, 2vw, 20px); /* To make design responeive*/
-    padding-left: clamp(16px, 5vw, 100px);
-    line-height: 1.2;
+    padding-left: clamp(0px, 3vw, 60px);
+    line-height: 1.15;
+
+    overflow:hidden; 
+
+   
 }
 
 .home-left h2 {
     color: #090909;
     font-size: clamp(18px, 2.2vw, 30px);
     font-weight: 600;
+
 }
 
 .home-left p{
     color: #171717;
-    font-size: clamp(28px, 6vw, 70px);
+    font-size: clamp(18px, 6vw, 70px);
     font-weight: 700;
+    max-height: 95%;
 }
 
 .home-hand-icon{
     display: flex;
-    flex-direction: row;
+    flex-direction:row;
     align-items: center;
-    gap: clamp(12px, 3vw, 40px);
+    width: clamp(36px, 10vw, 90px);
+}
+.hand{
+    margin-left: clamp(50px, 22vw, 600px);
 }
 
 .hand-hand-icon img{
@@ -50,14 +71,20 @@
     display: flex;
     justify-content: center;        /* يخلي النص بالنص */
     align-items: center;
-    background: linear-gradient(135deg, #ff4b4b, #ff7a7a); /* تدرج لوني أنعم */
-    width: clamp(200px, 40%, 320px);
-    height: clamp(48px, 9vw, 70px);
+    background: linear-gradient(135deg, #fb4343, #f77070); /* تدرج لوني أنعم */
+   
+     /* زر أصغر */
+    width: clamp(120px, 40%, 300px);   /* كان يبدأ من 200px */
+    height: clamp(20px, 7vw, 65px);    /* كان يبدأ من 48px */
+
     border-radius: 50px;
     margin-top: clamp(16px, 3vw, 30px);
+    gap: 10px;
+
+
 
     color: #fff;
-    font-size: clamp(14px, 2vw, 20px);
+    font-size: clamp(8.3px, 1.5vw, 40px);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -66,6 +93,7 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    
 }
 
 /* تأثير hover */
@@ -86,19 +114,21 @@
     align-items: center;
     justify-content: center;
     margin-right: 70px;
-    
+
+    max-height: 95%;
 
 }
 
 
 
  .mohsalem_img {
-    width: clamp(180px, 40vw, 420px);   /* ما تزيدش عن عرض البيرنت */
-    width: 45%;        /* نسبة من عرض البيرنت */
+    
+    width: clamp(200px, 40vw, 440px);   /* ما تزيدش عن عرض البيرنت */
+    inline-size: min(70vw, 440px);  /* أريح من تكرار width */
     max-height: 95%;
     height: auto;      /* يخلي الطول يتغير تلقائي حسب العرض */
     border-radius: 50%;
-    margin: 20px auto; /* توسيط فوق/تحت + بالنص */
+    margin: 10px auto; /* توسيط فوق/تحت + بالنص */
     display: block;
     opacity: 0.95;
 
@@ -109,6 +139,10 @@
     background: linear-gradient(180deg, #b2d5dd, #27e36022 70%);
     background-origin: border-box;
     background-clip: content-box, border-box;
+
+    
 }
+
+
 
 
