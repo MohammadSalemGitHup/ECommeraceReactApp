@@ -17,16 +17,23 @@ const ShopCategory = (props) => {
     
     <div className="shop-category">
       
-      <img src={props.banner} alt="" />
+      <img className="shop-category-banner" src={props.banner} alt="" />
 
       <div className="shop-category-index-sort">
         <p> <span>showing 1-12</span> out of 36 Products</p>
+      
+
+        <div className='shoopcategory-sort'>
+          
+          Sort by <img src={dropDown_icon} alt=""/>
+          
+          
+        </div>
+
       </div>
 
-      <div className='shoopcategory-sory'>
-        <img src={dropDown_icon} alt="" />
-      </div>
 
+      {/* display products */}
       <div className="shopcategory-products">
 
         {
@@ -42,6 +49,14 @@ const ShopCategory = (props) => {
 
           })
         }
+      </div>
+
+
+      {/* load more */}
+      <div className="shopcategory-loadmore" >
+
+        Explore More
+         
       </div>
 
     </div>
