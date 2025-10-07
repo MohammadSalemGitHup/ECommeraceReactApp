@@ -16,16 +16,82 @@ Again, What is Context, Provider, useContext
 Note:
 Context and Provider written in PascalCase  => MohsalShopContext
 */
-import { createContext } from "react";
+
+
+/* What this file Do ?
+    1.Provide all_product data  to App component tree  
+    2.Provide cartItems to App component tree 
+*/
+import { createContext, useState } from "react";
 import all_product from "../Components/Assets/all_product";
 
-export const MohsalShopContext = createContext([]); // null => (default value; will be replaced by Provider's value)
-                                        // [] this means context will be return a array value
+export const MohsalShopContext = createContext(null); // null => (default value; will be replaced by Provider's value)
+        
 
+
+const getDefultCart = () => {
+    // create cart Object that represent key value paires from products (productID, productQuantity)
+    let cart = {};
+    for(let i=0; i < all_product.length; i++){
+        cart[i]=0;
+    }
+    return cart;
+}                
+
+
+/////////////// Provider ///////////////////////////
 const MohsalShopContextProvider = (props) => {
 
-    const mohsal_contextValue = all_product; // array value
-    
+    //state 
+    const [cartItems, setCartItems] = useState(getDefultCart());
+
+   
+    const addToCart = (itemId) => {
+
+        setCartItems( (prev) => {
+            return {...prev, [itemId]:(prev[itemId] + 1)}
+        });
+        console.log(`itemId:${itemId} added to cart +1`);
+        // console.log(cartItems);
+    }
+    ////
+    const removeFromCart = (itemId) => {
+        setCartItems( prev => {
+          return { ...prev, [itemId]:(prev[itemId] - 1) } 
+        });
+        console.log(`itemId:${itemId} removed from cart -1`);
+        // console.log(cartItems);
+    }
+    /////
+    const getTotalCartAmount = ()=>{
+        let totalAmount = 0;
+        for(const key in cartItems){ /* loop on dictionary*/
+            const item = all_product.find( (product) => product.id === Number(key));
+            if (item) {
+                totalAmount += ( item.new_price * cartItems[key] ); // price × quantity
+            }
+        }
+        return totalAmount;
+    }
+    /////
+    const getTotalCartItem = () => {
+         let totalItems = 0;
+         for(const key in cartItems){
+            if(cartItems[key] > 0){
+                totalItems += cartItems[key];
+            }
+         }
+        return totalItems;
+    }
+
+
+
+
+    const mohsal_contextValue = {all_product, // all_product it is a array value
+                                 cartItems, addToCart, removeFromCart,
+                                 getTotalCartAmount, 
+                                 getTotalCartItem
+                                 }; 
     
     return (
 

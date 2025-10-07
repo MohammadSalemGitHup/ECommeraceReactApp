@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
 
-import "./CSS/shopCategory.css";
-import { MohsalShopContext } from '../Context/shopContext';
-import dropDown_icon from "../Components/Assets/dropdown_icon.png";
-import Item from "../Components/Item/item";
+import "./shopCategory.css";
+import { MohsalShopContext } from '../../Context/shopContext';
+import dropDown_icon from "../../Components/Assets/dropdown_icon.png";
+import Item from "../../Components/Item/item";
 
 const ShopCategory = (props) => {
 
   // Context consumer
-  const products = useContext(MohsalShopContext); // this is the array of all data
+  const { all_product } = useContext(MohsalShopContext);  //get data as the same name from Context
+  const products = all_product; // Extract array 
   // console.log(Array.isArray(products), products?.length); 
-  
   
 
   return (

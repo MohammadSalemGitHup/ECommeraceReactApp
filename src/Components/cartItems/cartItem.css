@@ -1,0 +1,81 @@
+
+.cartItems{
+
+    margin: 100px 170px;
+}
+
+.cartItems hr {
+    height: 3px;
+    background: #e2e2e2;
+}
+
+.cartItems-format-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(197, 234, 226);
+}
+
+
+
+
+
+
+/* ////Cart Total ///// */
+
+.cartitems-down {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.cartitems-total-box {
+  background: #f8f8f8;                 /* light background for total section */
+  width: min(90%, 600px);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.cartitems-total-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 600;
+  color: #333;
+}
+
+
+/* /// modern Design for Button //// */
+
+.checkout-btn {
+  background: linear-gradient(135deg, #ff4b4b, #ff7a7a);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 0;
+  cursor: pointer;
+  font-size: clamp(16px, 2vw, 18px);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.checkout-btn:hover {
+  background: linear-gradient(135deg, #ff3333, #ff6666);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.checkout-btn:active {
+  transform: translateY(2px);               /* يعطي إحساس بالانضغاط */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);   /* ظل أقل ليبدو مضغوط */
+  background: linear-gradient(135deg, #e63e3e, #ff5a5a);
+}
