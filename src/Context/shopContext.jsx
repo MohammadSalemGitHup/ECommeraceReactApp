@@ -22,13 +22,16 @@ Context and Provider written in PascalCase  => MohsalShopContext
     1.Provide all_product data  to App component tree  
     2.Provide cartItems to App component tree 
 */
+
+/////////////////////////////////////////////////////////////////
 import { createContext, useState } from "react";
 import all_product from "../Components/Assets/all_product";
+// This is all_product must be get it from API => fetch("http://localhost:4000/getallproducts") in line 50
+
+
 
 export const MohsalShopContext = createContext(null); // null => (default value; will be replaced by Provider's value)
         
-
-
 const getDefultCart = () => {
     // create cart Object that represent key value paires from products (productID, productQuantity)
     let cart = {};
@@ -38,14 +41,13 @@ const getDefultCart = () => {
     return cart;
 }                
 
-
 /////////////// Provider ///////////////////////////
 const MohsalShopContextProvider = (props) => {
 
     //state 
     const [cartItems, setCartItems] = useState(getDefultCart());
 
-   
+    // here useEffect(async()=>{fetch("http://localhost:4000/getallproducts")},[])
     const addToCart = (itemId) => {
 
         setCartItems( (prev) => {
@@ -53,6 +55,7 @@ const MohsalShopContextProvider = (props) => {
         });
         console.log(`itemId:${itemId} added to cart +1`);
         // console.log(cartItems);
+        // add itemId on cart Object at  data base
     }
     ////
     const removeFromCart = (itemId) => {
@@ -61,6 +64,7 @@ const MohsalShopContextProvider = (props) => {
         });
         console.log(`itemId:${itemId} removed from cart -1`);
         // console.log(cartItems);
+        // remove itemId on cart Object at  data base
     }
     /////
     const getTotalCartAmount = ()=>{

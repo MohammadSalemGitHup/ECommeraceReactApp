@@ -14,6 +14,7 @@ import men_banner from "./Components/Assets/banner_mens.png";
 import women_banner from "./Components/Assets/banner_women.png";
 import kids_banner from "./Components/Assets/banner_kids.png";
 
+import RequireAuth from "./Components/RequireAuth.jsx";
 
 
 function App() {
@@ -30,21 +31,34 @@ function App() {
           <Route path="/" element={<Shop />} />
 
           <Route path="/mens" element={
-                                      <ShopCategory 
-                                        category="men" 
-                                        banner={men_banner}
-                                        />} 
+                                      <RequireAuth>
+                                        <ShopCategory category="men"  banner={men_banner}/>
+                                      </RequireAuth>   
+                                      } 
           />
-          <Route path="/womens" element={<ShopCategory category="women" banner={women_banner} />} />
-          <Route path="/kids" element={<ShopCategory category="kid" banner={kids_banner}/>} />
+
+
+
+          <Route path="/womens" element={
+            <RequireAuth>
+              <ShopCategory category="women" banner={women_banner} />
+            </RequireAuth>
+            } 
+          />
+          <Route path="/kids" element={
+            <RequireAuth>
+              <ShopCategory category="kid" banner={kids_banner}/>
+            </RequireAuth>
+            } 
+          />
 
           <Route path='/login' element={<LoginSignup />} />
           
-          <Route path='/product' element={<Product />}   >
+          <Route path='/product' element={<RequireAuth>   <Product />   </RequireAuth>}   >
               <Route path=':productId' element={<Product />} />
           </Route>
 
-          <Route path='/cart' element={<Cart />} />
+          <Route path='/cart' element={<RequireAuth>   <Cart />  </RequireAuth>} />
           
 
 
