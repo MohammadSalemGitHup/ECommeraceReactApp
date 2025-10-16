@@ -5,11 +5,21 @@ import "./productDisplay.css" ;
 import { MohsalShopContext } from "../../Context/shopContext";
 import { useContext } from "react";
 
+
+///////////// Component /////////////
 const ProductDisplay = (props) => {
 
     const { product } = props;
 
+
     const { addToCart }  = useContext(MohsalShopContext);
+
+
+    if (!product) {
+        console.log("From ProductDisplay: wait.... to get data From Context ....");
+        return null; 
+    }
+
 
 
     /////// JSX ////////
@@ -51,7 +61,9 @@ const ProductDisplay = (props) => {
                     <div>XL</div>
                     <div>XXL</div>
                 </div>
-                <button onClick={ () => addToCart(product.id) }>Add To Cart</button>
+                <button onClick={ () =>  addToCart(product.id) }>
+                    Add To Cart
+                </button>
             </div> 
 
         </div>

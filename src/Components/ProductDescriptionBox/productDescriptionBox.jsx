@@ -4,7 +4,7 @@ import "./productDescriptionBox.css";
 
 const ProductDescriptionBox = (props) => {
 
-    const product_description = props.descreption;
+    const product_description = props.description;
 
   return (
     <div className='productDescriptionBox'>

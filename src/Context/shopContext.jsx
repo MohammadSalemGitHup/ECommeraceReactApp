@@ -61,7 +61,8 @@ export const MohsalShopContext = createContext(null); // null => (default value;
 const getDefultCart = () => {
     // create cart Object that represent key value paires from products (productID, productQuantity)
     let cart = {};
-    for(let i=0; i < all_products.length; i++){
+    let numberOfProducts = 300;
+    for(let i=0; i < numberOfProducts; i++){
         cart[i]=0;
     }
     return cart;
@@ -93,14 +94,23 @@ const MohsalShopContextProvider = (props) => {
     //state 
     const [cartItems, setCartItems] = useState(getDefultCart());
 
-    const addToCart = (itemId) => {
+    // Monitoring On State
+    useEffect(() => {
+        console.log("✅ Cart changed:", cartItems);
+    },[cartItems]);
 
+    const addToCart = (itemId) => {
+        // console.log(itemId);
+        
         setCartItems( (prev) => {
             return {...prev, [itemId]:(prev[itemId] + 1)}
         });
         console.log(`itemId:${itemId} added to cart +1`);
-        // console.log(cartItems);
-        // add itemId on cart Object at  data base
+        
+        // add itemId on cart Object at data base
+        if( addItemOnCartInDb(itemId) ){
+            alert("added item on Db Suseccfuly ....");
+        }
     }
     ////
     const removeFromCart = (itemId) => {
@@ -108,8 +118,11 @@ const MohsalShopContextProvider = (props) => {
           return { ...prev, [itemId]:(prev[itemId] - 1) } 
         });
         console.log(`itemId:${itemId} removed from cart -1`);
-        // console.log(cartItems);
-        // remove itemId on cart Object at  data base
+
+        // remove itemId from cart Object at  data base
+        if( removeItemFromCartInDb(itemId) ){
+            alert("remove Item from Db Suseccfuly ....");
+        }
     }
     /////
     const getTotalCartAmount = ()=>{
@@ -154,3 +167,54 @@ const MohsalShopContextProvider = (props) => {
 }
 
 export default MohsalShopContextProvider; 
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////// Functionality /////////////////
+
+
+//////////////////////////////////////////////////////////////////////
+/////////// addItemOnCartInDb, removeItemFromCartInDb //////////////////
+////////////////////////////////////////////////////////////////////////
+const addItemOnCartInDb = (itemId) => {
+    return true;
+}
+
+
+const removeItemFromCartInDb = async (itemId) => {
+    const id = itemId;
+    try{
+        console.log(`product id : ${id}`);
+   
+        // const response = await fetch('http://localhost/removefromcart', {
+        //     method: "DELETE",
+        //     headers: {
+        //         "Accept": "application/json",
+        //     },
+        //     // credentials: "include", // uncomment if your API needs cookies
+        //     });
+       
+        // if(!response.ok){
+        //     alert(`Failed To Delete Product ${id} (HTTP ${response.status})`);
+        //     throw new Error(`Failed To Delete Product ${id} (HTTP ${response.status})`);
+        // }
+        
+        return true;   
+
+        
+    }catch(err){
+        console.error(err);
+        alert(`Catch : Failed To Delete Product : ${id}`);
+        return false;
+    }
+
+}

@@ -8,6 +8,12 @@ const Breadcrumbs = (props) => {
 
     const { product } = props;
 
+    // this condition is important it is wait... to get data From Context
+    if (!product) {
+      console.log("From Breadcrumbs: wait.... to get data From Context ....");
+      return null; 
+    }
+
   return (
     <div className='breadcrumbs'>
 

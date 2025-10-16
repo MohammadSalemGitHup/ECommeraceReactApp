@@ -10,7 +10,7 @@ const ShopCategory = ( props ) => {
   // Context consumer
   const { allProducts } = useContext(MohsalShopContext);  //get data as the same name from Context
   const products =  allProducts; // Extract array 
-  console.log(Array.isArray(products), products?.length); 
+  // console.log(Array.isArray(products), products?.length); 
   
 
   /////// JSX //////////////

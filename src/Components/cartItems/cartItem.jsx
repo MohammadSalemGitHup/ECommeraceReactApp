@@ -9,8 +9,10 @@ import OneCartItem from "./oneCartItem";
 const CartItem = () => {
       
     // Consum data from context 
-    const {all_product, cartItems, removeFromCart, getTotalCartAmount } = useContext(MohsalShopContext);
-    const products = all_product; // Extract array 
+    const {allProducts, cartItems, removeFromCart, getTotalCartAmount } = useContext(MohsalShopContext);
+    const products = allProducts; // Extract array 
+
+    
 
     const isItemAtcartItems = ()=>{
         for(const key in cartItems){ /* loop on dictionary*/
