@@ -32,7 +32,7 @@ function App() {
 
           <Route path="/mens" element={
                                       <RequireAuth>
-                                        <ShopCategory category="men"  banner={men_banner}/>
+                                        <ShopCategory category="man"  banner={men_banner}/>
                                       </RequireAuth>   
                                       } 
           />
@@ -47,7 +47,7 @@ function App() {
           />
           <Route path="/kids" element={
             <RequireAuth>
-              <ShopCategory category="kid" banner={kids_banner}/>
+              <ShopCategory category="kids" banner={kids_banner}/>
             </RequireAuth>
             } 
           />

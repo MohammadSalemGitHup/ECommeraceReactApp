@@ -5,14 +5,15 @@ import { MohsalShopContext } from '../../Context/shopContext';
 import dropDown_icon from "../../Components/Assets/dropdown_icon.png";
 import Item from "../../Components/Item/item";
 
-const ShopCategory = (props) => {
+const ShopCategory = ( props ) => {
 
   // Context consumer
-  const { all_product } = useContext(MohsalShopContext);  //get data as the same name from Context
-  const products = all_product; // Extract array 
-  // console.log(Array.isArray(products), products?.length); 
+  const { allProducts } = useContext(MohsalShopContext);  //get data as the same name from Context
+  const products =  allProducts; // Extract array 
+  console.log(Array.isArray(products), products?.length); 
   
 
+  /////// JSX //////////////
   return (
     
     <div className="shop-category">

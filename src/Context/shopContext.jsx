@@ -24,9 +24,35 @@ Context and Provider written in PascalCase  => MohsalShopContext
 */
 
 /////////////////////////////////////////////////////////////////
-import { createContext, useState } from "react";
-import all_product from "../Components/Assets/all_product";
-// This is all_product must be get it from API => fetch("http://localhost:4000/getallproducts") in line 50
+import { createContext, useState, useEffect } from "react";
+// import all_product from "../Components/Assets/all_product"; // getAllProductsFromDB not from localy
+
+//////////////////////////////////////////////////////////////////////////////////
+let all_products = [];
+export async function getAllProductsFromDB () {
+    try{
+
+        const res = await fetch("http://localhost:4000/getallproducts");
+        if(!res.ok){
+            throw new Error(`Failed to fetch products: ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        all_products =  data.products;
+
+        console.log("Products loaded:", all_products);
+        return all_products;
+
+    }catch(err){
+        console.error("Error fetching products:", err);
+        return [];
+    }
+   
+}
+///////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -35,19 +61,38 @@ export const MohsalShopContext = createContext(null); // null => (default value;
 const getDefultCart = () => {
     // create cart Object that represent key value paires from products (productID, productQuantity)
     let cart = {};
-    for(let i=0; i < all_product.length; i++){
+    for(let i=0; i < all_products.length; i++){
         cart[i]=0;
     }
     return cart;
 }                
 
+
+
+
+
 /////////////// Provider ///////////////////////////
 const MohsalShopContextProvider = (props) => {
+
+    // state
+    const [allProducts, setAllProducts] = useState([]);
+    // onload get all Products 
+    useEffect( () => {
+        
+        const fetchData = async () => {
+        const all_products = await getAllProductsFromDB();
+        setAllProducts(all_products);
+        };
+
+        fetchData();
+        
+        
+    },[]);
+
 
     //state 
     const [cartItems, setCartItems] = useState(getDefultCart());
 
-    // here useEffect(async()=>{fetch("http://localhost:4000/getallproducts")},[])
     const addToCart = (itemId) => {
 
         setCartItems( (prev) => {
@@ -70,7 +115,8 @@ const MohsalShopContextProvider = (props) => {
     const getTotalCartAmount = ()=>{
         let totalAmount = 0;
         for(const key in cartItems){ /* loop on dictionary*/
-            const item = all_product.find( (product) => product.id === Number(key));
+            const item = all_products
+            .find( (product) => product.id === Number(key));
             if (item) {
                 totalAmount += ( item.new_price * cartItems[key] ); // price × quantity
             }
@@ -91,7 +137,7 @@ const MohsalShopContextProvider = (props) => {
 
 
 
-    const mohsal_contextValue = {all_product, // all_product it is a array value
+    const mohsal_contextValue = {allProducts, // allProducts it is a array value (Pass it as a state)
                                  cartItems, addToCart, removeFromCart,
                                  getTotalCartAmount, 
                                  getTotalCartItem
