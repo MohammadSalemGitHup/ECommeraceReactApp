@@ -58,17 +58,7 @@ export async function getAllProductsFromDB () {
 
 export const MohsalShopContext = createContext(null); // null => (default value; will be replaced by Provider's value)
         
-const getDefultCart = () => {
-    // create cart Object that represent key value paires from products (productID, productQuantity)
-    let cart = {};
-    let numberOfProducts = 300;
-    for(let i=0; i < numberOfProducts; i++){
-        cart[i]=0;
-    }
-    return cart;
-}                
-
-
+    
 
 
 
@@ -92,35 +82,51 @@ const MohsalShopContextProvider = (props) => {
 
 
     //state 
-    const [cartItems, setCartItems] = useState(getDefultCart());
+    const [cartItems, setCartItems] = useState({});
 
     // Monitoring On State
     useEffect(() => {
-        console.log("✅ Cart changed:", cartItems);
+        // console.log("✅ Cart changed:", cartItems);
+        console.log("cart Changes....");
+        
     },[cartItems]);
 
-    const addToCart = (itemId) => {
-        // console.log(itemId);
+    /////////////////////
+    useEffect(() => {
+        const fetchCart = async () => {
+        const data = await getCartFromDB();
+        if (data) {
+            setCartItems(data); // ✅ update state after data arrives
+        }
+    };
+
+  fetchCart();
+}, []);
+
+    const addToCart = async (itemId) => {
         
-        setCartItems( (prev) => {
-            return {...prev, [itemId]:(prev[itemId] + 1)}
-        });
         console.log(`itemId:${itemId} added to cart +1`);
         
         // add itemId on cart Object at data base
-        if( addItemOnCartInDb(itemId) ){
+        const data_response = await addItemOnCartInDb(itemId);
+        if( data_response.success === true ){
+            
+            setCartItems( data_response.cartData);
             alert("added item on Db Suseccfuly ....");
+        }
+        else{
+            alert("added item on Db Not Sccess ....?");
         }
     }
     ////
-    const removeFromCart = (itemId) => {
-        setCartItems( prev => {
-          return { ...prev, [itemId]:(prev[itemId] - 1) } 
-        });
+    const removeFromCart = async (itemId) => {
+        
         console.log(`itemId:${itemId} removed from cart -1`);
 
         // remove itemId from cart Object at  data base
-        if( removeItemFromCartInDb(itemId) ){
+        const data_response = await removeItemFromCartInDb(itemId);
+        if( data_response.success === true ){
+            setCartItems( data_response.cartData);
             alert("remove Item from Db Suseccfuly ....");
         }
     }
@@ -173,44 +179,70 @@ export default MohsalShopContextProvider;
 
 
 
-
-
-
-
-
-
 ///////////////// Functionality /////////////////
+
 
 
 //////////////////////////////////////////////////////////////////////
 /////////// addItemOnCartInDb, removeItemFromCartInDb //////////////////
 ////////////////////////////////////////////////////////////////////////
-const addItemOnCartInDb = (itemId) => {
-    return true;
+const addItemOnCartInDb = async (itemId) => {
+
+    const id = itemId;
+    try{
+        console.log(`product id : ${id}`);
+   
+        const response = await fetch('http://localhost:4000/addtocart', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem("auth-token")
+            },
+            body: JSON.stringify({ itemId }),
+            });
+       
+        if(!response.ok){
+            alert(`Failed addItemOnCartInDb ${id} (HTTP ${response.status}), ${response.err}`);
+            throw new Error(`Failed To Delete Product ${id} (HTTP ${response.status})`);
+        }
+
+        const data_response = await response.json();
+
+        return data_response;   
+
+        
+    }catch(err){
+        console.error(err);
+        alert(`Catch : Failed addItemOnCartInDb : ${id}`);
+    }
 }
 
-
+////////////////////
 const removeItemFromCartInDb = async (itemId) => {
     const id = itemId;
     try{
         console.log(`product id : ${id}`);
    
-        // const response = await fetch('http://localhost/removefromcart', {
-        //     method: "DELETE",
-        //     headers: {
-        //         "Accept": "application/json",
-        //     },
-        //     // credentials: "include", // uncomment if your API needs cookies
-        //     });
+        const response = await fetch('http://localhost:4000/removefromcart', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem("auth-token")
+            },
+            body: JSON.stringify({ itemId }),
+            });
        
-        // if(!response.ok){
-        //     alert(`Failed To Delete Product ${id} (HTTP ${response.status})`);
-        //     throw new Error(`Failed To Delete Product ${id} (HTTP ${response.status})`);
-        // }
-        
-        return true;   
+        if(!response.ok){
+            alert(`Failed removeItemFromCartInDb ${id} (HTTP ${response.status}), ${response.err}`);
+            throw new Error(`Failed To remove Product ${id} (HTTP ${response.status})`);
+        }
 
-        
+        const data_response = await response.json();
+
+        return data_response;
+       
+
+
     }catch(err){
         console.error(err);
         alert(`Catch : Failed To Delete Product : ${id}`);
@@ -218,3 +250,43 @@ const removeItemFromCartInDb = async (itemId) => {
     }
 
 }
+
+
+
+
+
+
+
+//////////////////////////////////
+
+const getCartFromDB = async () => {
+  try {
+    const token = localStorage.getItem("auth-token");
+    if (!token) {
+      console.warn("⚠️ No token found — user is not logged in");
+      return null;
+    }
+
+    const res = await fetch("http://localhost:4000/getcartData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": token,   // 👈 send token to middleware
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch cart. Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    // console.log("🛒 Cart from DB:", data.cartData);
+    let cartData = {};
+    cartData = data.cartData;
+    return cartData; 
+
+  } catch (err) {
+    console.error("❌ Error fetching cart:", err);
+    return null;
+  }
+};
