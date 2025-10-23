@@ -4,12 +4,13 @@ import "./cartItem.css";
 import { useContext } from "react";
 import { MohsalShopContext } from "../../Context/shopContext";
 import OneCartItem from "./oneCartItem";
+import { Link } from "react-router-dom";
 
 
 const CartItem = () => {
       
     // Consum data from context 
-    const {allProducts, cartItems, removeFromCart, getTotalCartAmount } = useContext(MohsalShopContext);
+    const {allProducts, cartItems, removeFromCart, clearCart,getTotalCartAmount } = useContext(MohsalShopContext);
     const products = allProducts; // Extract array 
 
     
@@ -40,6 +41,7 @@ const CartItem = () => {
             <p>Quantity</p>
             <p>Total</p>
             <p>Remove</p>
+            <button className="btn-clearCart" onClick={clearCart}>Clear Cart</button>
         </div>
         <hr /> 
         
@@ -80,7 +82,12 @@ const CartItem = () => {
                                         <h3>Total</h3>
                                         <h3>${getTotalCartAmount()}</h3>
                                     </div>
-                                    <button className="checkout-btn">PROCEED TO CHECKOUT</button>
+
+                                    
+                                    <Link to={"/payment"} className="checkout-btn">
+                                        PROCEED TO CHECKOUT
+                                    </Link>
+
                                 </div>
                             </div>
                         </>

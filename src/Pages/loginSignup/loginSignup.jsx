@@ -108,6 +108,9 @@ const loginHandler = async () => {
         
         localStorage.setItem("auth-token", response_data.jwt_token);
         window.location.replace("/");
+        
+        // for payment save email in loacal storage 
+        localStorage.setItem("userEmail", formData.email);
       }
       else{
         alert(`Login faild`);

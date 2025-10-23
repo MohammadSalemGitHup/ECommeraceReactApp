@@ -8,6 +8,7 @@ import ShopCategory from './Pages/ShopCategory/shopCategory.jsx';
 import Product from "./Pages/Product/product.jsx";
 import Cart from './Pages/cart.jsx';
 import LoginSignup from "./Pages/loginSignup/loginSignup.jsx";
+import Payment from "./Pages/Payment/payment.jsx"
 import Footer from './Components/Footer/footer.jsx';
 
 import men_banner from "./Components/Assets/banner_mens.png";
@@ -59,6 +60,9 @@ function App() {
           </Route>
 
           <Route path='/cart' element={<RequireAuth>   <Cart />  </RequireAuth>} />
+
+          <Route path='/payment' element={<RequireAuth>   <Payment />  </RequireAuth>} />
+
           
 
 

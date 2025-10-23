@@ -86,7 +86,7 @@ const MohsalShopContextProvider = (props) => {
 
     // Monitoring On State
     useEffect(() => {
-        // console.log("✅ Cart changed:", cartItems);
+
         console.log("cart Changes....");
         
     },[cartItems]);
@@ -131,6 +131,21 @@ const MohsalShopContextProvider = (props) => {
         }
     }
     /////
+    const clearCart = async () => {
+        console.log("🛒 Clearing entire cart...");
+        // Clear cartItems in the database
+        const data_response = await clearCartInDb();
+        if (data_response.sucess === true) {
+        // 🧹 Set the cart to an empty object
+        setCartItems({});
+        alert("All items removed from cart ✅");
+        } else {
+            alert("Failed to clear cart ❌");
+        }     
+    };
+
+
+    /////
     const getTotalCartAmount = ()=>{
         let totalAmount = 0;
         for(const key in cartItems){ /* loop on dictionary*/
@@ -157,7 +172,7 @@ const MohsalShopContextProvider = (props) => {
 
 
     const mohsal_contextValue = {allProducts, // allProducts it is a array value (Pass it as a state)
-                                 cartItems, addToCart, removeFromCart,
+                                 cartItems, addToCart, removeFromCart, clearCart,
                                  getTotalCartAmount, 
                                  getTotalCartItem
                                  }; 
@@ -288,5 +303,46 @@ const getCartFromDB = async () => {
   } catch (err) {
     console.error("❌ Error fetching cart:", err);
     return null;
+  }
+};
+
+
+////////////// Wrap the backend endpoint here //////////// 
+
+const clearCartInDb = async () => {
+    
+  try {
+    const token = localStorage.getItem("auth-token");
+    if (!token) {
+      console.warn("⚠️ No token found — user is not logged in");
+      console.log("You are not Login !!!!!!");alert("You are not Login !!!!!!")
+      return { sucess: false };
+    }
+
+    const res = await fetch("http://localhost:4000/setcartData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": token,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to clear cart. Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    if (data.sucess === true) {
+      console.log("🧹 Cart cleared in DB successfully");
+      return data;
+    } else {
+      console.warn("⚠️ Cart clear failed on server");
+      return { sucess: false };
+    }
+
+  } catch (err) {
+    console.error("catch:❌ Error in clearCartInDb", err);
+    return { sucess: false };
   }
 };

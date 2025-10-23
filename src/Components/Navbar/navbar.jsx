@@ -22,7 +22,7 @@ const Navbar = (  ) => {
 
     const handleLogout = () => {
         localStorage.removeItem("auth-token");
-        window.location.reload();            
+        window.location.href = window.location.origin;            
     };
 
     // use hook 
