@@ -23,7 +23,9 @@ export default function useValidUser() {
       }
 
       try {
-        const response = await fetch("http://localhost:4000/verifytoken", {
+
+        const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+        const response = await fetch(`${BACKEND_API}/verifytoken`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

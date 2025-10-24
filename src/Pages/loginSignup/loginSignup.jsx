@@ -47,7 +47,8 @@ const signupHandler = async () => {
     // create a payload object (the Body of POST)
     const body_payload = {userName: formData.userName, email: formData.email, password: formData.password};
     
-    const response  = await fetch("http://localhost:4000/signup", {
+    const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+    const response  = await fetch(`${BACKEND_API}/signup`, {
       method: "POST",
       headers:{
         "Content-Type": "application/json", // tells the backend to expect JSON
@@ -89,7 +90,8 @@ const loginHandler = async () => {
     // create a payload object (the Body of POST)
     const body_payload = { email: formData.email, password: formData.password };
     
-    const response = await fetch("http://localhost:4000/login", {
+    const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+    const response = await fetch(`${BACKEND_API}/login`, {
       method: "POST",
       headers:{
         "Content-Type": "application/json", // tells the backend to expect JSON

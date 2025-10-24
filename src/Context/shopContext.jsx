@@ -31,8 +31,9 @@ import { createContext, useState, useEffect } from "react";
 let all_products = [];
 export async function getAllProductsFromDB () {
     try{
+        const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
 
-        const res = await fetch("http://localhost:4000/getallproducts");
+        const res = await fetch(`${BACKEND_API}/getallproducts`);
         if(!res.ok){
             throw new Error(`Failed to fetch products: ${res.status}`);
         }
@@ -206,6 +207,8 @@ const addItemOnCartInDb = async (itemId) => {
     const id = itemId;
     try{
         console.log(`product id : ${id}`);
+
+
    
         const response = await fetch('http://localhost:4000/addtocart', {
             method: "POST",
@@ -237,8 +240,10 @@ const removeItemFromCartInDb = async (itemId) => {
     const id = itemId;
     try{
         console.log(`product id : ${id}`);
+
+        const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
    
-        const response = await fetch('http://localhost:4000/removefromcart', {
+        const response = await fetch(`${BACKEND_API}/removefromcart`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -282,7 +287,8 @@ const getCartFromDB = async () => {
       return null;
     }
 
-    const res = await fetch("http://localhost:4000/getcartData", {
+    const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+    const res = await fetch(`${BACKEND_API}/getcartData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -319,7 +325,8 @@ const clearCartInDb = async () => {
       return { sucess: false };
     }
 
-    const res = await fetch("http://localhost:4000/setcartData", {
+    const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+    const res = await fetch(`${BACKEND_API}/setcartData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

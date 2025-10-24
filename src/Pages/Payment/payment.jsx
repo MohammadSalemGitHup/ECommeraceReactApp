@@ -113,7 +113,8 @@ const sendorder = async (billTotal, savedEmail) => {
     `;
 
     // 🌐 send the POST request to your backend
-    const response = await fetch("http://localhost:6060/sendorderemail", {
+    const OTPSERVER_API =process.env.OTPSERVER_URL || "http://localhost:6060";
+    const response = await fetch(`${OTPSERVER_API}/sendorderemail`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
