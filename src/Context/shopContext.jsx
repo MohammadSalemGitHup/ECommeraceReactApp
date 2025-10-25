@@ -31,7 +31,10 @@ import { createContext, useState, useEffect } from "react";
 let all_products = [];
 export async function getAllProductsFromDB () {
     try{
-        const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+
+
+        // const LOCAL_API = "http://localhost:4000";
+        const BACKEND_API = process.env.REACT_APP_BACKEND_BASE_URL;
 
         const res = await fetch(`${BACKEND_API}/getallproducts`);
         if(!res.ok){
@@ -208,9 +211,10 @@ const addItemOnCartInDb = async (itemId) => {
     try{
         console.log(`product id : ${id}`);
 
-
+        // const LOCAL_API = "http://localhost:4000";
+        const BACKEND_API = process.env.REACT_APP_BACKEND_BASE_URL;
    
-        const response = await fetch('http://localhost:4000/addtocart', {
+        const response = await fetch(`${BACKEND_API}/addtocart`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -241,7 +245,8 @@ const removeItemFromCartInDb = async (itemId) => {
     try{
         console.log(`product id : ${id}`);
 
-        const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+        // const LOCAL_API = "http://localhost:4000";
+        const BACKEND_API = process.env.REACT_APP_BACKEND_BASE_URL;
    
         const response = await fetch(`${BACKEND_API}/removefromcart`, {
             method: "POST",
@@ -287,7 +292,9 @@ const getCartFromDB = async () => {
       return null;
     }
 
-    const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+    // const LOCAL_API = "http://localhost:4000";
+    const BACKEND_API = process.env.REACT_APP_BACKEND_BASE_URL;
+
     const res = await fetch(`${BACKEND_API}/getcartData`, {
       method: "POST",
       headers: {
@@ -325,7 +332,9 @@ const clearCartInDb = async () => {
       return { sucess: false };
     }
 
-    const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+    // const LOCAL_API = "http://localhost:4000";
+    const BACKEND_API = process.env.REACT_APP_BACKEND_BASE_URL;
+    
     const res = await fetch(`${BACKEND_API}/setcartData`, {
       method: "POST",
       headers: {

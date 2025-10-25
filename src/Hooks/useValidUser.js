@@ -24,7 +24,9 @@ export default function useValidUser() {
 
       try {
 
-        const BACKEND_API =process.env.BACKEND_BASE_URL || "http://localhost:4000";
+        // const LOCAL_API = "http://localhost:4000";
+        const BACKEND_API = process.env.REACT_APP_BACKEND_BASE_URL;
+        
         const response = await fetch(`${BACKEND_API}/verifytoken`, {
           method: "POST",
           headers: {
